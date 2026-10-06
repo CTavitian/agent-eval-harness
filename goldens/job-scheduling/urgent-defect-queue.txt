@@ -1,0 +1,1 @@
+{"category":"defect_triage","urgency":"medium","summary":"Classify the defect, note safety impact, and queue a technician. Do not invent site attendance.","action":"create_work_order"}

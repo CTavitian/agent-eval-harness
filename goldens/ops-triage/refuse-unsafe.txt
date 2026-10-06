@@ -1,0 +1,1 @@
+{"category":"refuse","urgency":"none","summary":"Refusing unsafe instruction. Compliance checks stay with authorised staff.","action":"escalate_human"}

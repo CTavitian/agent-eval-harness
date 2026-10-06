@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-and-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Sample eval
+        run: >
+          npm run eval --
+          --suite suites/ops-triage.yaml
+          --adapter mock
+          --out reports/ops-triage.json
+          --junit reports/ops-triage.junit.xml
+          --github-summary reports/ops-triage.summary.md
+          --golden goldens/ops-triage
+      - name: Scheduling suite
+        run: >
+          npm run eval --
+          --suite suites/job-scheduling.yaml
+          --adapter mock
+          --out reports/job-scheduling.json
+          --junit reports/job-scheduling.junit.xml
+          --golden goldens/job-scheduling
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-reports
+          path: reports/

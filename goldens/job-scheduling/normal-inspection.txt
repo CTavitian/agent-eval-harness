@@ -1,0 +1,1 @@
+{"category":"scheduling","urgency":"normal","summary":"Propose crew window based on priority and travel. Keep statutory work with a licensed technician.","action":"draft_schedule"}
